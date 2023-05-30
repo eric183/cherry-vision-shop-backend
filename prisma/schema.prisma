@@ -1,3 +1,97 @@
+// generator client {
+//   provider = "prisma-client-js"
+// }
+
+// datasource db {
+//   provider = "postgresql"
+//   // cockroachdb
+//   url      = env("DATABASE_URL")
+// }
+
+// model Widget {
+//   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+// }
+
+// model User {
+//   id             String    @id @default(cuid())
+//   username       String?
+//   email          String    @unique
+//   password       String
+//   gender         String?
+//   avatar         String?
+//   matchedDemands String[]
+//   contacts       Contact[]
+//   demands        Demand[]
+//   @@unique([id])
+// }
+
+// model Contact {
+//   id     String @id @default(cuid())
+//   userId String @unique
+//   user   User   @relation(fields: [userId], references: [id])
+// }
+
+// model Demand {
+//   id           String       @id @default(cuid())
+//   created_time DateTime     @default(now())
+//   English      String
+//   Chinese      String
+//   demandRole   DemandRole   @default(FREE)
+//   userId       String?
+//   categoryType CategoryType
+//   end_time     DateTime?
+//   status       DemandStatus
+//   title        String
+//   images       String[]
+//   placeId      String?
+//   place        Place?       @relation(fields: [placeId], references: [id])
+//   User         User?        @relation(fields: [userId], references: [id])
+// }
+
+// model Place {
+//   id        String   @default(cuid())
+//   latitude  Float
+//   longitude Float
+//   name      String   @unique
+//   Demand    Demand[]
+
+//   @@unique([id])
+// }
+
+// enum DemandRole {
+//   NEED
+//   SERVER
+//   FREE
+// }
+
+// enum CategoryType {
+//   Social
+//   Work
+//   Home
+//   Health
+//   Shopping
+//   Travel
+//   Learning
+//   Entertainment
+//   Transportation
+//   Finance
+// }
+
+// enum DemandStatus {
+//   CLOSED
+//   OPEN
+//   PENDING
+//   COMPLETED
+// }
+
+
+
+
+
+
+
+
+
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
@@ -8,4 +102,13 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  // url      = "postgresql://erickuang:Kuangsa183.@34.84.149.183:3306/cherry-vision-shop-db"
+  // url      = "postgresql://erickuang:Kuangsa183.@localhost/cherry-vision-shop-db?host=/cloudsql/united-bot-386604:asia-northeast1:cherry-vision-shop-db"
+
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
 }
